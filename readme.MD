@@ -1,4 +1,4 @@
-# Dirshti: Your own video calling app
+# Drishti: Your own video calling app
 
 ## Drishti's is made of:
 
