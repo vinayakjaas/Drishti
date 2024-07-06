@@ -1,5 +1,7 @@
 # Drishti: Your own video calling app
 
+<img src="Meeting-Room.jpg" alt="Meeting-Room">
+
 ## Drishti's is made of:
 
 **Front-end**: ReactJS, Bootstrap, Context API<br/>
