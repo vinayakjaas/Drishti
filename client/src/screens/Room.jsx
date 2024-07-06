@@ -113,48 +113,49 @@ const RoomPage = () => {
 
   return (
     <div className="container d-flex justify-content-center align-items-center min-vh-100 text-light">
-      <div className="card bg-dark text-light p-5">
+      <div className="card bg-dark text-light p-5 w-100">
         <h1 className="text-center mb-4">Room Page</h1>
         <h4 className="text-center mb-4">
           {remoteSocketId ? "Connected" : "No one in room"}
         </h4>
-        {myStream && (
-          <button className="btn btn-success w-100 mb-3" onClick={sendStreams}>
-            Send Stream
-          </button>
-        )}
-        {remoteSocketId && (
-          <button
-            className="btn btn-danger w-100 mb-3"
-            onClick={handleCallUser}
-          >
-            CALL
-          </button>
-        )}
-        {myStream && (
-          <div className="mb-4">
-            <h5 className="text-center">My Stream</h5>
-            <ReactPlayer
-              playing
-              muted
-              height="200px"
-              width="100%"
-              url={myStream}
-            />
-          </div>
-        )}
-        {remoteStream && (
-          <div>
-            <h5 className="text-center">Remote Stream</h5>
-            <ReactPlayer
-              playing
-              muted
-              height="200px"
-              width="100%"
-              url={remoteStream}
-            />
-          </div>
-        )}
+        <div className="d-flex justify-content-center">
+          {myStream && (
+            <button className="btn btn-success mx-2" onClick={sendStreams}>
+              Send Stream
+            </button>
+          )}
+          {remoteSocketId && (
+            <button className="btn btn-danger mx-2" onClick={handleCallUser}>
+              CALL
+            </button>
+          )}
+        </div>
+        <div className="row mt-4">
+          {myStream && (
+            <div className="col-md-6 mb-4">
+              <h5 className="text-center">My Stream</h5>
+              <ReactPlayer
+                playing
+                muted
+                height="200px"
+                width="100%"
+                url={myStream}
+              />
+            </div>
+          )}
+          {remoteStream && (
+            <div className="col-md-6 mb-4">
+              <h5 className="text-center">Remote Stream</h5>
+              <ReactPlayer
+                playing
+                muted
+                height="200px"
+                width="100%"
+                url={remoteStream}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
