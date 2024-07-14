@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback, useState } from "react";
+import { useLocation } from "react-router-dom";
 import ReactPlayer from "react-player";
 import peer from "../service/peer";
 import { useSocket } from "../context/SocketProvider";
@@ -6,6 +7,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../custom.css"; // Import custom CSS for greenish vampire effect
 
 const RoomPage = () => {
+  const location = useLocation();
+  const { email, username } = location.state || {};
   const socket = useSocket();
   const [remoteSocketId, setRemoteSocketId] = useState(null);
   const [myStream, setMyStream] = useState();
@@ -141,6 +144,9 @@ const RoomPage = () => {
                 width="100%"
                 url={myStream}
               />
+              <div className="text-center mt-2">
+                <span>{username}</span>
+              </div>
             </div>
           )}
           {remoteStream && (
@@ -153,6 +159,9 @@ const RoomPage = () => {
                 width="100%"
                 url={remoteStream}
               />
+              <div className="text-center mt-2">
+                <span>{username}</span>
+              </div>
             </div>
           )}
         </div>

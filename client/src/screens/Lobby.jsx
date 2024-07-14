@@ -7,6 +7,7 @@ import "../custom.css"; // Import custom CSS for night mode
 const LobbyScreen = () => {
   const [email, setEmail] = useState("");
   const [room, setRoom] = useState("");
+  const [username, setUsername] = useState("");
 
   const socket = useSocket();
   const navigate = useNavigate();
@@ -14,15 +15,15 @@ const LobbyScreen = () => {
   const handleSubmitForm = useCallback(
     (e) => {
       e.preventDefault();
-      socket.emit("room:join", { email, room });
+      socket.emit("room:join", { email, room, username });
     },
-    [email, room, socket]
+    [email, room, username, socket]
   );
 
   const handleJoinRoom = useCallback(
     (data) => {
-      const { email, room } = data;
-      navigate(`/room/${room}`);
+      const { email, room, username } = data;
+      navigate(`/room/${room}`, { state: { email, username } });
     },
     [navigate]
   );
@@ -40,6 +41,19 @@ const LobbyScreen = () => {
         <h1 className="text-center mb-4">Lobby</h1>
         <form onSubmit={handleSubmitForm}>
           <div className="form-group mb-3">
+            <label htmlFor="username" className="form-label">
+              Username
+            </label>
+            <input
+              type="text"
+              id="username"
+              className="form-control"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group mb-3">
             <label htmlFor="email" className="form-label">
               Email ID
             </label>
@@ -49,6 +63,7 @@ const LobbyScreen = () => {
               className="form-control"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              required
             />
           </div>
           <div className="form-group mb-4">
@@ -61,6 +76,7 @@ const LobbyScreen = () => {
               className="form-control"
               value={room}
               onChange={(e) => setRoom(e.target.value)}
+              required
             />
           </div>
           <button type="submit" className="btn btn-primary w-100">
