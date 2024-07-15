@@ -51,7 +51,7 @@ const server = http.createServer((req, res) => {
 
 const io = new Server(server, {
   cors: {
-    origin: "https://drishti-rks.vercel.app/",
+    origin: "https://drishti-server.vercel.app/",
     methods: ["GET", "POST"],
   },
 });
